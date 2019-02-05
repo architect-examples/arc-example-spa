@@ -1,0 +1,7 @@
+{
+  "name": "arcspa-post-logout",
+  "dependencies": {
+    "@architect/data": "^2.0.13",
+    "@architect/functions": "^2.0.4"
+  }
+}
