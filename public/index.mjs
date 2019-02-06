@@ -7,6 +7,5 @@ async function renderTodos() {
   await render(result)
 }
 
-
 // first run
 renderTodos()

@@ -1,5 +1,5 @@
 {
-  "name": "testprox2-get-api-todos",
+  "name": "arcspa-get-api-todos",
   "dependencies": {
     "@architect/data": "^2.0.13",
     "@architect/functions": "^2.0.4",

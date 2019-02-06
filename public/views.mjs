@@ -1,7 +1,8 @@
 import todos from '/todos.mjs'
 
 export default {
-  // renders login form
+
+  // renders login form which does a normal http post to /login
   login(state={}) {
     let err = state.error? `<span class=error>${state.error}</span>` : ''
     document.body.innerHTML = `
@@ -13,17 +14,19 @@ export default {
     `
   },
 
-  // renders todos and binds event handlers
+  // renders todos (and binds event handler)
   todos(state={}) {
+    // update the dom
     document.body.innerHTML = todolist(state)
+    // bind the event handler
     let todoForm = document.getElementById('todoForm')
     let todoList = document.getElementById('todos')
-    todoForm.onsubmit = create
-    todoList.onclick = modify
+    todoForm.onsubmit = handler
+    todoList.onclick = handler
   }
 }
 
-// todo template
+// todo template (returns a plain dom string)
 function todo(state) {
   return `
   <li>
@@ -34,14 +37,14 @@ function todo(state) {
   `
 }
 
-// todolist template
+// todolist template (returns a plain dom string)
 function todolist(todos) {
   return `
     <form method=post action=/logout>
       <button type=submit>logout</button>
     </form>
-    <form id=todoForm>
-      <input type=text name=todo placeholder="todo text here">
+    <form id=todoForm data-action=create>
+      <input type=text placeholder="todo text here">
       <button type=submit>save</button>
     </form>
     <ul id=todos>
@@ -50,23 +53,8 @@ function todolist(todos) {
   `
 }
 
-// create handler
-async function create(event) {
-  event.preventDefault()
-  let todoForm = document.getElementById('todoForm')
-  let todoList = document.getElementById('todos')
-  try {
-    let text = todoForm.querySelector('input').value
-    let saved = await todos.create({text})
-    todoList.innerHTML += todo(saved)
-  }
-  catch(e) {
-    console.log(e.message)
-  }
-}
-
-// modify handler
-async function modify(event) {
+// event handler (looks at data-action attribute)
+async function handler(event) {
   event.preventDefault()
   let todoForm = document.getElementById('todoForm')
   let todoList = document.getElementById('todos')
@@ -74,6 +62,13 @@ async function modify(event) {
   let key = event.target.dataset.key
   let el = event.target.parentNode
   try {
+    if (action === 'create') {
+      let input = event.target.querySelector('input')
+      let text = input.value
+      input.value = ''
+      let saved = await todos.create({text})
+      todoList.innerHTML += todo(saved)
+    }
     if (action === 'destroy') {
       await todos.destroy(key)
       el.remove()

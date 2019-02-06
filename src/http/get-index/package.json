@@ -1,5 +1,5 @@
 {
-  "name": "testprox2-get-index",
+  "name": "arcspa-get-index",
   "dependencies": {
     "@architect/data": "^2.0.13",
     "@architect/functions": "^2.0.4"

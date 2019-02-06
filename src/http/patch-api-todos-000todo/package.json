@@ -1,5 +1,5 @@
 {
-  "name": "testprox2-patch-api-todos-000todo",
+  "name": "arcspa-patch-api-todos-000todo",
   "dependencies": {
     "@architect/data": "^2.0.13",
     "@architect/functions": "^2.0.4",
