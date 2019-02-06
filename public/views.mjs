@@ -5,16 +5,10 @@ export default {
   // renders login form which does a normal http post to /login
   login(state={}) {
     let err = state.error? `<span class=error>${state.error}</span>` : ''
-    document.body.innerHTML = `
-    ${err}
-    <form action=/login method=post>
-      <input type=text name=passcode placeholder="secret passcode here">
-      <button type=submit>login</button>
-    </form>
-    `
+    document.body.innerHTML = loginForm(err)
   },
 
-  // renders todos (and binds event handler)
+  // renders todos and binds event handler
   todos(state={}) {
     // update the dom
     document.body.innerHTML = todolist(state)
@@ -24,6 +18,17 @@ export default {
     todoForm.onsubmit = handler
     todoList.onclick = handler
   }
+}
+
+// login form template
+function loginForm(err) {
+  return `
+  ${err}
+  <form action=/login method=post>
+    <input type=text name=passcode placeholder="secret passcode here">
+    <button type=submit>login</button>
+  </form>
+  `
 }
 
 // todo template (returns a plain dom string)
@@ -59,8 +64,6 @@ async function handler(event) {
   let todoForm = document.getElementById('todoForm')
   let todoList = document.getElementById('todos')
   let action = event.target.dataset.action
-  let key = event.target.dataset.key
-  let el = event.target.parentNode
   try {
     if (action === 'create') {
       let input = event.target.querySelector('input')
@@ -70,10 +73,14 @@ async function handler(event) {
       todoList.innerHTML += todo(saved)
     }
     if (action === 'destroy') {
+      let key = event.target.dataset.key
+      let el = event.target.parentNode
       await todos.destroy(key)
       el.remove()
     }
     if (action === 'update') {
+      let key = event.target.dataset.key
+      let el = event.target.parentNode
       let text = el.querySelector('input').value
       await todos.update({key, text})
     }
