@@ -10,6 +10,6 @@
   "author": "Brian LeRoux <b@brian.io>",
   "license": "Apache-2.0",
   "dependencies": {
-    "@architect/architect": "file:../../Repo/arc"
+    "@architect/architect": "^5.5.0"
   }
 }
