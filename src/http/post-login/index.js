@@ -1,12 +1,11 @@
 let arc = require('@architect/functions')
 
-exports.handler = async function login(req) {
-  let session = await arc.http.session.read(req)
-  session.loggedIn = req.body.passcode === 'secret'
-  let cookie = await arc.http.session.write(session)
+exports.handler = arc.http.async(login)
+
+async function login(req) {
+  let loggedIn = req.body.passcode === 'secret'
   return {
-    cookie,
-    status: 302,
+    session: { loggedIn },
     location: '/',
   }
 }

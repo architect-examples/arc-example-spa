@@ -1,15 +1,14 @@
 {
-  "name": "testprox",
+  "name": "spathing",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "sandbox"
   },
-  "keywords": [],
   "author": "Brian LeRoux <b@brian.io>",
   "license": "Apache-2.0",
   "dependencies": {
-    "@architect/architect": "^5.5.0"
+    "@architect/functions": "latest",
+    "@architect/sandbox": "latest",
+    "@begin/data": "^2.0.1"
   }
 }
