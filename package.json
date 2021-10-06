@@ -7,8 +7,8 @@
   "author": "Brian LeRoux <b@brian.io>",
   "license": "Apache-2.0",
   "dependencies": {
-    "@architect/functions": "latest",
-    "@architect/sandbox": "latest",
-    "@begin/data": "^2.0.1"
+    "@architect/functions": "^4.0.0",
+    "@architect/sandbox": "^4.1.1",
+    "@begin/data": "^3.0.0"
   }
 }
