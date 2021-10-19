@@ -9,6 +9,6 @@
   "dependencies": {
     "@architect/functions": "^4.0.0",
     "@architect/sandbox": "^4.1.1",
-    "@begin/data": "^3.0.0"
+    "@begin/data": "^3.0.4"
   }
 }
